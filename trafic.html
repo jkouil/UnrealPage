@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Trafic</title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="mobile-menu-open" class="shadow-large">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+    <!-- End #mobile-menu-toggle -->
+   
+    <!-- End header -->
+
+    <div id="lead">
+        <div id="lead-content">
+            <h1>TraficFlow AI</h1>
+            <h2>Unreal demo</h2>
+            
+        </div>
+        <!-- End #lead-content -->
+
+        <div id="lead-overlay"></div>
+
+        <div id="lead-down">
+            <span>
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </span>
+        </div>
+        <!-- End #lead-down -->
+    </div>
+    <!-- End #lead -->
+
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="heading">About This Demo</h2>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                       This demo is implemented using <strong>Unreal Engine</strong>'s <strong>Blueprints</strong>, inspired by the NPCs in the <strong>GTA5</strong> series: they walk randomly on the streets but do not normally wait for traffic lights. I aimed to create a <strong>random-walking NPC model</strong> that <strong>waits for traffic lights</strong>.Using <strong>AI Behavior Trees and NavMesh</strong>, the pedestrians' random movement and state-driven behavior are implemented. The traffic light logic is implemented through Blueprint scripts, ensuring synchronization with pedestrian behavior.                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End #about -->
+
+    
+    <div id="projects" class="background-alt">
+        <h2 class="heading">Demo Video</h2>
+        
+        <div class="video-container">
+            <!-- 将YouTube嵌入代码粘贴到此处 -->
+            <iframe width="420" height="315"
+src="https://www.youtube.com/watch?v=Hj8u7Eu9AJs">
+</iframe>
+        </div>
+        <h2>
+        <p>video link:</p>
+  <a href="https://www.youtube.com/watch?v=Hj8u7Eu9AJs" target="_blank">https://www.youtube.com/watch?v=Hj8u7Eu9AJs</a>
+</h2>
+        <p>
+            
+        </p>
+    
+    </div>
+
+    <!--Start animation explains -->
+    
+    <div class="project shadow-larg">
+    <h3>Trafic Light </h3>
+    <p>
+       <p>
+  Implemented a <strong>state machine</strong> logic using <strong>Blueprints</strong>, adding light sources of different colors to each traffic light. When a light needs to turn on, the <strong>intensity of the light source is increased</strong> to achieve the visual effect of traffic lights. Additionally, we used a <strong>collision volume</strong> to detect <strong>AI_Pawns</strong> entering the traffic light area, and by accessing their <strong>AI_Controller</strong>, we updated the <strong>Blackboard</strong> to implement a <strong>notification mechanism</strong> for traffic light state changes.
+   <div><img src="traficlight.PNG"> </div>
+    
+    </div>
+
+    
+
+    <!--Start combat explains -->
+    
+    <div class="project shadow-larg">
+    <h3>Sidewalk and NavMesh</h3>
+    <p>
+  We set the <strong>middle part of the sidewalk</strong> as <strong>NavAreaObstacle</strong> to increase the <strong>Cost</strong> of passing through this area, and set the <strong>road areas outside the sidewalk</strong> as <strong>NavAreaNull</strong>. Then, we added two <strong>Actors</strong> on both sides of the sidewalk as the <strong>start point</strong> and <strong>end point</strong>, and created a simple <strong>invisible material</strong> for them to avoid affecting the visual appearance, while setting their <strong>collision to NoCollision</strong>. These two <strong>Actors</strong> are stored in the pedestrian AI's variables (<strong>object-oriented</strong>), and are swapped when crossing the road to <strong>reset the sidewalk start point</strong>.
+</p>
+
+    <div class="project-image">
+    <h2>Hit Detect BP function</h2>
+    <img src="navMesh.PNG">
+    
+  </div>
+
+    </div>
+
+
+    <!-- Start AI System  -->
+    <div class="project shadow-larg">
+    
+    <h3>Cross Road detection</h3>
+    <p>
+  A key issue to solve in the traffic demo is how to determine whether a randomly selected target point is on the opposite side of the road. To achieve this, I simulated the real-world principle of using <strong>line of sight</strong> to determine road positions by utilizing the <strong>LineTrace</strong> function to check if the path between the <strong>Actor</strong>'s current position and the target point intersects with an <strong>invisible box Actor</strong> tagged with <strong>Road</strong>. If it intersects, the target point is determined to be on the opposite side of the road. To avoid interference from other Actors causing detection failures or physical blockages, I raised the <strong>Z-axis positions</strong> of both the <strong>Start</strong> and <strong>End</strong> points of the <strong>LineTrace</strong>, and simultaneously raised the <strong>Z-axis position</strong> of the <strong>invisible Road box Actor</strong>.
+</p>
+    <img src="LineTrace.PNG" alt="Behavior Tree Image">
+    </div>
+
+
+
+    
+    <!-- Start AI System  -->
+    <div class="project shadow-larg">
+    
+    <h3>AI Behavior tree</h3>
+    <p>
+  I used a <strong>Behavior Tree</strong> to construct the AI workflow, combining logic from <strong>Blackboard</strong> and <strong>Tasks</strong> such as <strong>Target selection</strong>, <strong>whether the target is on the opposite side of the road</strong>, and <strong>traffic light state</strong> to ensure the AI functions correctly. The Behavior Tree dynamically adjusts the AI's behavior through <strong>conditional checks</strong> and <strong>task execution</strong>. For example, when the target point is on the opposite side of the road and the traffic light is green, the AI will start crossing the road; otherwise, it will wait or choose another target point.
+</p>
+    <img src="traficTree.PNG" alt="Behavior Tree Image">
+    </div>
+
+    <!-- Start Device System  -->
+    <div class="project shadow-larg">
+    <h3>Car system, avoid car crash</h3>
+    <p>
+  I used <strong>SpawnActor</strong> to generate a car at regular intervals and moved the cars forward using <strong>Timeline and Relative Transformation</strong>. To maintain a safe distance between vehicles, I used an <strong>Actor variable</strong> to allow each car to store a <strong>Reference</strong> to the car in front, creating a <strong>linked list</strong> to determine if it is too close to the preceding car. This mechanism effectively prevents collisions when multiple cars are waiting at a traffic light. Additionally, I placed an <strong>Actor</strong> in front of the sidewalk to calculate when a car needs to stop, and used the traffic light's <strong>collision Box</strong> to trigger a <strong>custom event</strong> that updates the car's stop-and-go state.
+</p>
+    <img src="noCarCrash.PNG" alt="cars">
+    
+   
+  </div>
+
+
+
+
+    <!-- End #projects -->
+
+    <div id="skills">
+        <h2 class="heading">Skills</h2>
+        <ul>
+            <li>Blueprint</li>
+            <li>Collision box</li>
+            <li>NavMesh/smartLinks</li>
+            <li>Event Graphs</li>
+            <li>Linked List</li>
+            <li>Behavior Tree</li>
+            <li>Task/blackboard</li>
+            <li>LineTrace</li>
+            
+        </ul>
+    </div>
+    <!-- End #skills -->
+
+    <div id="contact">
+        <h2>Get in Touch</h2>
+        <p> Email: qiwu.wen@umontreal.ca</p>
+        <p> phone number: 514-569-3908</p>
+        <!-- End #contact-form -->
+    </div>
+    <!-- End #contact -->
+
+    
+    <!-- End footer -->
+
+</body>
+
+</html>

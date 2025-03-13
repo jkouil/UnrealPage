@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Demo:Soul Like RPG</title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="mobile-menu-open" class="shadow-large">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+    <!-- End #mobile-menu-toggle -->
+   
+    <!-- End header -->
+
+    <div id="lead">
+        <div id="lead-content">
+            <h1>Unreal Souls</h1>
+            <h2>Unreal demo</h2>
+            
+        </div>
+        <!-- End #lead-content -->
+
+        <div id="lead-overlay"></div>
+
+        <div id="lead-down">
+            <span>
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </span>
+        </div>
+        <!-- End #lead-down -->
+    </div>
+    <!-- End #lead -->
+
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="heading">About This Demo</h2>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                       <p>This is a <strong>Blueprint</strong> and <strong>C++</strong>-based <strong>Unreal Engine</strong> demo designed to replicate the core gameplay mechanics of the classic RPG <strong>Dark Souls</strong> series. In addition to the default movement and jumping provided by the third-person template, I have integrated an <strong>ARPG animation pack</strong> to implement essential combat mechanics, including <strong>dodging</strong>, <strong>blocking</strong>, <strong>attacking</strong>, and <strong>combo attacks</strong>, along with the corresponding combat logic. Furthermore, I have added basic <strong>AI patrol</strong> and <strong>combat behavior</strong>, enabling enemies to actively search for and engage the player, enhancing both the challenge and immersion of the game.</p>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End #about -->
+
+    
+    <div id="projects" class="background-alt">
+        <h2 class="heading">Demo Video</h2>
+        
+        <div class="video-container">
+            <!-- 将YouTube嵌入代码粘贴到此处 -->
+            <iframe width="420" height="315"
+src="https://www.youtube.com/watch?v=xi9rZIoOLN4">
+</iframe>
+        </div>
+        <h2>
+  <p>video link:</p>
+  <a href="https://www.youtube.com/watch?v=xi9rZIoOLN4" target="_blank">https://www.youtube.com/watch?v=xi9rZIoOLN4</a>
+</h2>
+        <p>
+            
+        </p>
+    
+    </div>
+
+    <!--Start animation explains -->
+    
+    <div class="project shadow-larg">
+    <h3>Animation System </h3>
+    <p>
+      <strong>Using IK retargeting to bind the ARPG animation pack to the blueprint skeleton</strong>, and generating state animations (such as continuous defense), action animations, and idle animations into <strong>2D Blend Space</strong> and <strong>State Machine</strong>.
+    </p>
+    <p>
+      One-shot animations (such as <strong>attack</strong>, <strong>block</strong>, <strong>dodge</strong>, <strong>combo</strong>, <strong>take damage</strong>, and <strong>death</strong>) are generated as <strong>Animation Montages</strong>, and <strong>Animation Notifiers</strong> are created at specific timestamps to trigger corresponding functions.
+    </p>
+
+    
+    </div>
+
+    
+
+    <!--Start combat explains -->
+    
+    <div class="project shadow-larg">
+    <h3>Combat System (C++ and Blueprint Implementation)</h3>
+    <p>
+      Actions are implemented through <strong>Animation Montages</strong>, and <strong>Handles</strong> along with <strong>Animation Notifiers</strong> are used to notify the character class when damage is taken and whether <strong>dodging</strong> or <strong>blocking</strong> is possible. Keyboard input is disabled during actions to ensure smooth execution.
+    </p>
+    <p>
+      The damage mechanism is implemented using <strong>Sphere Trace for Objects</strong>, which is included in the function and triggers the enemy's <strong>HitReaction</strong> event. The logic for receiving damage is similar, ensuring the integrity and consistency of the combat system.
+    </p>
+
+    <div class="project-image">
+    <h2>Hit Detect BP function</h2>
+    <img src="soul_combat.PNG">
+    
+  </div>
+
+    </div>
+
+
+    <!-- Start AI System  -->
+    <div class="project shadow-larg">
+    
+    <h3>AI System</h3>
+    <p>
+      AI patrol is implemented using a combination of <strong>NavMesh</strong>,<strong>Behavior Tree</strong> and <strong>Tasks</strong>. The <strong>Tasks</strong> are integrated with <strong>PawnSensing</strong> to enable the AI to detect and chase enemies. Additionally, the <strong>Tasks</strong> are combined with our implemented <strong>combat system</strong> to determine when to attack.
+    </p>
+    <img src="combat_tree.PNG" alt="Behavior Tree Image">
+    </div>
+
+
+
+    
+    <!-- Start AI System  -->
+    <div class="project shadow-larg">
+    
+    <h3>AI System</h3>
+    <p>
+      AI patrol is implemented using a combination of <strong>NavMesh</strong>,<strong>Behavior Tree</strong> and <strong>Tasks</strong>. The <strong>Tasks</strong> are integrated with <strong>PawnSensing</strong> to enable the AI to detect and chase enemies. Additionally, the <strong>Tasks</strong> are combined with our implemented <strong>combat system</strong> to determine when to attack.
+    </p>
+    <img src="combat_tree.PNG" alt="Behavior Tree Image">
+    </div>
+
+    <!-- Start Device System  -->
+    <div class="project shadow-larg">
+    <h3>Lever/Elevator Platform</h3>
+    <p>
+      Through the mechanism of <strong>levers</strong> and <strong>elevator platforms</strong>, players can access new areas. This feature is implemented using <strong>Blueprints</strong>, with interaction logic handled through <strong>Collision Box</strong> , <strong>API blueprint</strong>and <strong>Character Event Graphs</strong>.
+    </p>
+    <img src="stage.PNG" alt="Lever/Elevator Platform Image">
+    <img src="device.PNG" alt="Lever/Elevator Platform Image">
+   
+  </div>
+
+
+
+
+    <!-- End #projects -->
+
+    <div id="skills">
+        <h2 class="heading">Skills</h2>
+        <ul>
+            <li>C++</li>
+            <li>Blueprint</li>
+            <li>Collision box</li>
+            <li>animation sytem(blueprint, montage, notifier,etc.)</li>
+            <li>Event Graphs</li>
+            <li>API</li>
+            <li>Behavior Tree</li>
+            <li>Task/blackboard</li>
+            <li>NavMesh</li>
+            
+        </ul>
+    </div>
+    <!-- End #skills -->
+
+    <div id="contact">
+        <h2>Get in Touch</h2>
+        <p> Email: qiwu.wen@umontreal.ca</p>
+        <p> phone number: 514-569-3908</p>
+        <!-- End #contact-form -->
+    </div>
+    <!-- End #contact -->
+
+    
+    <!-- End footer -->
+
+</body>
+
+</html>
