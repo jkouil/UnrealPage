@@ -83,7 +83,7 @@ src="https://www.youtube.com/watch?v=Hj8u7Eu9AJs">
     <p>
        <p>
   Implemented a <strong>state machine</strong> logic using <strong>Blueprints</strong>, adding light sources of different colors to each traffic light. When a light needs to turn on, the <strong>intensity of the light source is increased</strong> to achieve the visual effect of traffic lights. Additionally, we used a <strong>collision volume</strong> to detect <strong>AI_Pawns</strong> entering the traffic light area, and by accessing their <strong>AI_Controller</strong>, we updated the <strong>Blackboard</strong> to implement a <strong>notification mechanism</strong> for traffic light state changes.
-   <div><img src="traficlight.PNG"> </div>
+   <div><img src="traficlight.png"> </div>
     
     </div>
 
@@ -99,7 +99,7 @@ src="https://www.youtube.com/watch?v=Hj8u7Eu9AJs">
 
     <div class="project-image">
     <h2>Hit Detect BP function</h2>
-    <img src="navMesh.PNG">
+    <img src="navMesh.png">
     
   </div>
 
@@ -113,7 +113,7 @@ src="https://www.youtube.com/watch?v=Hj8u7Eu9AJs">
     <p>
   A key issue to solve in the traffic demo is how to determine whether a randomly selected target point is on the opposite side of the road. To achieve this, I simulated the real-world principle of using <strong>line of sight</strong> to determine road positions by utilizing the <strong>LineTrace</strong> function to check if the path between the <strong>Actor</strong>'s current position and the target point intersects with an <strong>invisible box Actor</strong> tagged with <strong>Road</strong>. If it intersects, the target point is determined to be on the opposite side of the road. To avoid interference from other Actors causing detection failures or physical blockages, I raised the <strong>Z-axis positions</strong> of both the <strong>Start</strong> and <strong>End</strong> points of the <strong>LineTrace</strong>, and simultaneously raised the <strong>Z-axis position</strong> of the <strong>invisible Road box Actor</strong>.
 </p>
-    <img src="LineTrace.PNG" alt="Behavior Tree Image">
+    <img src="LineTrace.png" alt="Behavior Tree Image">
     </div>
 
 
@@ -126,7 +126,7 @@ src="https://www.youtube.com/watch?v=Hj8u7Eu9AJs">
     <p>
   I used a <strong>Behavior Tree</strong> to construct the AI workflow, combining logic from <strong>Blackboard</strong> and <strong>Tasks</strong> such as <strong>Target selection</strong>, <strong>whether the target is on the opposite side of the road</strong>, and <strong>traffic light state</strong> to ensure the AI functions correctly. The Behavior Tree dynamically adjusts the AI's behavior through <strong>conditional checks</strong> and <strong>task execution</strong>. For example, when the target point is on the opposite side of the road and the traffic light is green, the AI will start crossing the road; otherwise, it will wait or choose another target point.
 </p>
-    <img src="traficTree.PNG" alt="Behavior Tree Image">
+    <img src="traficTree.png" alt="Behavior Tree Image">
     </div>
 
     <!-- Start Device System  -->
@@ -135,7 +135,7 @@ src="https://www.youtube.com/watch?v=Hj8u7Eu9AJs">
     <p>
   I used <strong>SpawnActor</strong> to generate a car at regular intervals and moved the cars forward using <strong>Timeline and Relative Transformation</strong>. To maintain a safe distance between vehicles, I used an <strong>Actor variable</strong> to allow each car to store a <strong>Reference</strong> to the car in front, creating a <strong>linked list</strong> to determine if it is too close to the preceding car. This mechanism effectively prevents collisions when multiple cars are waiting at a traffic light. Additionally, I placed an <strong>Actor</strong> in front of the sidewalk to calculate when a car needs to stop, and used the traffic light's <strong>collision Box</strong> to trigger a <strong>custom event</strong> that updates the car's stop-and-go state.
 </p>
-    <img src="noCarCrash.PNG" alt="cars">
+    <img src="noCarCrash.png" alt="cars">
     
    
   </div>
